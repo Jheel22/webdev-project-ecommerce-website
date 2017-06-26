@@ -1,0 +1,75 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">E~COM</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/">Home</a></li>
+                <li ng-if="model.user.role=='ADMIN'"><a href="#!/admin">Admin</a></li>
+                <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
+                <li ng-if="model.user.role=='RETAILER'"><a href="#!/product">My Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/product">Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/service">Services</a></li>
+                <li><a href="#aboutcontent">About Us</a></li>
+                <li><a href="#contactcontent">Contact Us</a></li>
+                <li ng-show="!model.user._id"><a href="#!/login">Login</a></li>
+                <li ng-show="model.user._id"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="panel panel-default panelchange2">
+        <div class="panel-heading panelfont">
+            <h4 class="pull-left">User List</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+
+                <li ng-repeat="seller in model.sellers" class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <a href="">
+                                {{seller.username}}
+                            </a>
+                        </div>
+                        <div class="col-xs-3">
+                            <a ng-if="seller.listOfFollowers.indexOf(model.userId)<0 && model.user.role==='CUSTOMER'" class="btn btn-sm pull-right btn-default" ng-click="model.updateFollowers(seller)" style="color:white">
+                                Follow
+                            </a>
+                            <a ng-if="seller.listOfFollowers.indexOf(model.userId)>-1 && model.user.role==='CUSTOMER'" class="btn btn-sm pull-right btn-primary" style="color:white">
+                                Following
+                            </a>
+                        </div>
+                        <div class="col-xs-3">
+                            <a ng-if="model.user.listOfFollowers.indexOf(seller._id)<0 && model.user.role==='RETAILER'" class="btn btn-sm pull-right btn-default" style="color:white">
+                                Not Following
+                            </a>
+                            <a ng-if="model.user.listOfFollowers.indexOf(seller._id)>-1 && model.user.role==='RETAILER'" class="btn btn-sm pull-right btn-primary" style="color:white">
+                                Following
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav pfont">
+            <p>Developed by<a href="https://mehta-jheel-webdev.herokuapp.com/" class="btn btn-link text-primary">Jheel Mehta</a>@ 2017</p>
+        </ul>
+    </div>
+</nav>

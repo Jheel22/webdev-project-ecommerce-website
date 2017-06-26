@@ -1,0 +1,89 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">E~COM</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/">Home</a></li>
+                <li ng-if="model.currentUser.role=='ADMIN'"><a href="#!/admin">Admin</a></li>
+                <li ng-show="model.currentUser._id"><a href="#!/profile">Profile</a></li>
+                <li ng-if="model.currentUser.role=='RETAILER'"><a href="#!/product">My Products</a></li>
+                <li ng-if="model.currentUser.role=='CUSTOMER'"><a href="#!/viewproducts">Products</a></li>
+                <li ng-if="model.currentUser.role=='CUSTOMER'"><a href="#!/viewproducts">Services</a></li>
+                <li><a href="#aboutcontent">About Us</a></li>
+                <li><a href="#contactcontent">Contact Us</a></li>
+                <li ng-show="!model.currentUser._id"><a href="#!/login">Login</a></li>
+                <li ng-show="model.currentUser._id"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+
+<div class="container-fluid">
+<div class="row">
+    <div class="hidden-xs col-md-2 col-lg-4"></div>
+    <div class="col-xs-12 col-md-8 col-lg-4">
+    <div class="panel panel-default panelchange">
+
+            <h3 class="text-center">Login</h3>
+        <div class="panel-body">
+            <div ng-show="model.error" class="alert alert-danger">
+                {{model.error}}
+            </div>
+            <label for="username">Username</label>
+            <input ng-model="username"
+                   type="text"
+                   id="username"
+                   class="form-control"
+                   placeholder="username"
+                   required/>
+
+            <label for="username">Password</label>
+            <input ng-model="password"
+                   type="password"
+                   id="password"
+                   class="form-control"
+                   placeholder="password"
+                   required/>
+
+            <a ng-click="model.login(username, password)"
+               class="btn btn-default btn-block">
+                Login
+            </a>
+
+
+            <a href="/auth/google" class="btn btn-danger btn-block">
+                <span class="fa fa-google-plus"></span>
+                Google
+            </a>
+            <a href="/auth/facebook" class="btn btn-primary btn-block">
+                <span class="fa fa-facebook"></span>
+                Facebook
+            </a>
+
+            <a href="#!/register" class="btn btn-link text-primary pull-left">Sign Up!</a>
+           <!-- <a href="" class="btn btn-link text-primary pull-right">Forgot Password?</a>-->
+        </div>
+    </div>
+    </div>
+
+    <div class="hidden-xs col-md-2 col-lg-4"></div>
+</div>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav pfont">
+            <p>Developed by<a href="https://mehta-jheel-webdev.herokuapp.com/" class="btn btn-link text-primary">Jheel Mehta</a>@ 2017</p>
+        </ul>
+    </div>
+</nav>

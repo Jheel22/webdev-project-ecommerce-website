@@ -1,0 +1,105 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">E~COM</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/">Home</a></li>
+                <li ng-if="model.currentUser.role=='ADMIN'"><a href="#!/admin">Admin</a></li>
+                <li ng-show="model.currentUser._id"><a href="#!/profile">Profile</a></li>
+                <li ng-if="model.currentUser.role=='RETAILER'"><a href="#!/product">My Products</a></li>
+                <li ng-if="model.currentUser.role=='CUSTOMER'"><a href="#!/viewproducts">Products</a></li>
+                <li ng-if="model.currentUser.role=='CUSTOMER'"><a href="#!/viewproducts">Services</a></li>
+                <li><a href="#aboutcontent">About Us</a></li>
+                <li><a href="#contactcontent">Contact Us</a></li>
+                <li ng-show="!model.currentUser._id"><a href="#!/login">Login</a></li>
+                <li ng-show="model.currentUser._id"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#bs-carousel" data-slide-to="1"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item slides active">
+            <div class="slide-1"></div>
+            <div class="hero">
+                <hgroup>
+                    <h1>young entrepreneurs</h1>
+                    <h3>Get started on creating a brand for your products & services</h3>
+                </hgroup>
+
+            </div>
+        </div>
+        <div class="item slides">
+            <div class="slide-2"></div>
+            <div class="hero">
+                <hgroup>
+                    <h1>Not an entrepreneur?</h1>
+                    <h3>No worries! checkout and shop cool stuff</h3>
+                </hgroup>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <h2 class="text-center" id="aboutcontent">About Us</h2>
+    <hr>
+    <p class="text-justify">Our goal is to provide a platform to build their business for small time entrepreneurs. Most of
+    the time small entrepreneurs have their hand-crafted or collected products to sell online, but due to unavailable tools,
+    they cannot manage to have a website of their own. Our website comes to their rescue. Interested in selling your products
+     or services online? Join our website to display and sell your products right away.</p>
+    <p class="text-justify">Not an entrepreneur? No worries, our website has something to offer to you too.
+    Join our website today and you can view and buy products from the talented entrepreneurs. A variety of services
+    are available too at your disposable. Also you can compare the products to products on ebay and then buy.</p>
+    <h5 class="text-center">Happy Shopping!</h5>
+</div>
+
+<div class="container-fluid">
+    <h2 class="text-center" id="contactcontent">Contact Us</h2>
+    <hr>
+    <div class="row-fluid">
+        <div class="col-md-3">
+            <address>
+                <strong>Northeastern University</strong><br>
+                360 Huntington Ave<br>
+                Boston<br>
+                MA 02115<br>
+                USA<br>
+                <a href="mailto:jheelmehta22@gmail.com"><span class="glyphicon glyphicon-envelope"></span> jheelmehta22@gmail.com</a>
+            </address>
+        </div>
+        <div class="col-md-9">
+            <div class="map-container">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2949.1274194639514!2d-71.09136038454436!3d42.33980667918814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e37a1999cf5ce1%3A0xc97b00e66522b98c!2sNortheastern+University!5e0!3m2!1sen!2sus!4v1498378335245" scrolling="no" width="100%" height="350" frameborder="0" style="border:1px" allowfullscreen></iframe>
+        </div>
+        </div>
+
+    </div>
+</div>
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav pfont">
+            <p>Developed by<a href="" class="btn btn-link text-primary">Jheel Mehta</a>@ 2017</p>
+        </ul>
+    </div>
+</nav>

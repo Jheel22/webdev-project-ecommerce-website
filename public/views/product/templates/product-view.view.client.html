@@ -1,0 +1,84 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">E~COM</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/">Home</a></li>
+                <li ng-if="model.user.role=='ADMIN'"><a href="#!/admin">Admin</a></li>
+                <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
+                <li ng-if="model.user.role=='RETAILER'"><a href="#!/product">My Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/product">Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/service">Services</a></li>
+                <li><a href="#aboutcontent">About Us</a></li>
+                <li><a href="#contactcontent">Contact Us</a></li>
+                <li ng-show="!model.user._id"><a href="#!/login">Login</a></li>
+                <li ng-show="model.user._id"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="panel panel-default panelchange2">
+        <div class="panel-body">
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+<img src="{{model.product.url}}" width="300px" height="300px">
+
+        </div>
+        <div class="col-xs-12 col-md-8">
+<h3>{{model.product.name}}</h3>
+            <p><b>Specifications</b> : {{model.product.description}}</p>
+            <p ng-if="model.product.type=='product'"><b>Quantity Available</b> : {{model.product.quantity}}</p>
+            <p><b>Rate</b> : {{model.product.price}}</p>
+            <label ng-if="model.product.type=='product'" for="name">Quantiy to order</label>
+            <input ng-if="model.product.type=='product'" class="form-control"
+                   ng-model="model.quant"
+                   placeholder="1"
+                   id="name"/>
+            <label disabled="disabled" ng-if="model.amount!=0" for="amt">Total Amount</label>
+            <input disabled="disabled" ng-if="model.amount!=0" class="form-control"
+                   ng-model="model.amount"
+                   placeholder="1"
+                   id="amt"/>
+            <a ng-click="model.orderProduct(model.product,model.quant)"
+               class="btn btn-sm btn-default pull-right">
+                Place order
+            </a>
+            <a href="#!/productcompare/{{model.productId}}/name/{{model.product.name}}"
+               class="btn btn-sm btn-default pull-right">
+                Compare
+            </a>
+        </div>
+    </div>
+
+<div class="row">
+    <a ng-click="model.updateProductLikes(model.product)"
+       class="btn btn-link text-primary btn-lg pull-left">
+
+        <span class="glyphicon glyphicon-thumbs-up">{{model.product.likes}} likes</span>
+    </a>
+
+</div>
+
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav pfont">
+            <p>Developed by<a href="https://mehta-jheel-webdev.herokuapp.com/" class="btn btn-link text-primary">Jheel Mehta</a>@ 2017</p>
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,105 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">E~COM</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/">Home</a></li>
+                <li ng-if="model.user.role=='ADMIN'"><a href="#!/admin">Admin</a></li>
+                <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
+                <li ng-if="model.user.role=='RETAILER'"><a href="#!/product">My Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts">Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts">Services</a></li>
+                <li><a href="#aboutcontent">About Us</a></li>
+                <li><a href="#contactcontent">Contact Us</a></li>
+                <li ng-show="!model.user._id"><a href="#!/login">Login</a></li>
+                <li ng-show="model.user._id"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="panel panel-default panelchange2">
+        <div class="panel-body">
+    <div class="row">
+        <div class="col-xs-12">
+            <div ng-show="model.error" class="alert alert-danger">
+                {{model.error}}
+            </div>
+            <label for="type">Type</label>
+            <select class="form-control" id="type" ng-model="model.product.type" ng-options="source.name as source.name for source in model.typeList">
+                <option value="">-- Select item --</option>
+            </select>
+            <label ng-show="model.product.type=='product'" for="category_p">Category</label>
+            <select class="form-control" ng-show="model.product.type=='product'" id="category_p" ng-model="model.product.category" ng-options="source.name as source.name for source in model.productList">
+                <option value="">-- Select item --</option>
+            </select>
+            <label ng-show="model.product.type=='service'" for="category_s">Category</label>
+            <select class="form-control" ng-show="model.product.type=='service'" id="category_s" ng-model="model.product.category" ng-options="source.name as source.name for source in model.serviceList">
+                <option value="">-- Select item --</option>
+            </select>
+            <label for="name">Name</label>
+            <input class="form-control"
+                   ng-model="model.product.name"
+                   placeholder="facebook"
+                   id="name"/>
+
+            <label for="description">Description</label>
+            <textarea id="description"
+                      rows="5"
+                      ng-model="model.product.description"
+                      placeholder="So big it is its own country"
+                      class="form-control"></textarea>
+            <label for="image">Image URL</label>
+            <input id="image"
+                   ng-model="model.product.url"
+                   placeholder=""
+                   class="form-control"/>
+            <form action="/api/project/upload"   method="post" enctype="multipart/form-data">
+                <input  name="myFile"    type="file" class="form-control"/>
+                <input  name="productId"  value="{{model.product._id}}"   style="display: none"/>
+                <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
+            </form>
+
+            <label ng-show="model.product.type=='product'" for="quantity">Quantity</label>
+            <input ng-show="model.product.type=='product'" class="form-control"
+                   ng-model="model.product.quantity"
+                   placeholder="facebook"
+                   id="quantity"/>
+
+            <label for="rate">Rate</label>
+            <input class="form-control"
+                   ng-model="model.product.price"
+                   placeholder="in USD"
+                   id="rate"/>
+            <a ng-click="model.updateProduct(model.product)"
+               class="btn btn-block btn-default">
+                Update
+            </a>
+            <a ng-click="model.deleteProduct(model.productId)"
+               class="btn btn-block btn-default">
+                Delete
+            </a>
+        </div>
+    </div>
+        </div>
+    </div>
+
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav pfont">
+            <p>Developed by<a href="https://mehta-jheel-webdev.herokuapp.com/" class="btn btn-link text-primary">Jheel Mehta</a>@ 2017</p>
+        </ul>
+    </div>
+</nav>

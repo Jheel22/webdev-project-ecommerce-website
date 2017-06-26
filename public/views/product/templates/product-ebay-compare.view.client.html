@@ -1,0 +1,90 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">E~COM</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/">Home</a></li>
+                <li ng-if="model.user.role=='ADMIN'"><a href="#!/admin">Admin</a></li>
+                <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
+                <li ng-if="model.user.role=='RETAILER'"><a href="#!/product">My Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/product">Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/service">Services</a></li>
+                <li><a href="#aboutcontent">About Us</a></li>
+                <li><a href="#contactcontent">Contact Us</a></li>
+                <li ng-show="!model.user._id"><a href="#!/login">Login</a></li>
+                <li ng-show="model.user._id"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="panel panel-default panelchange2">
+        <div class="panel-body">
+<h1>eBay Search Results</h1>
+<div id="results"></div>
+            <input id="title" class="form-control"/>
+            <input id="clickMe" type="button" value="clickme" />
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav pfont">
+            <p>Developed by<a href="https://mehta-jheel-webdev.herokuapp.com/" class="btn btn-link text-primary">Jheel Mehta</a>@ 2017</p>
+        </ul>
+    </div>
+</nav>
+<script>
+
+    //- Using an anonymous function:
+    document.getElementById("clickMe").onclick = function() {
+console.log("k");
+        var product="{{model.productName}}";
+        var url = "http://svcs.ebay.com/services/search/FindingService/v1";
+        url += "?OPERATION-NAME=findItemsByKeywords";
+        url += "&SERVICE-VERSION=1.0.0";
+        url += "&SECURITY-APPNAME=JheelMeh-MyTestAp-PRD-87a98c72e-48e13fd1";
+        url += "&GLOBAL-ID=EBAY-US";
+        url += "&RESPONSE-DATA-FORMAT=JSON";
+        url += "&callback=_cb_findItemsByKeywords";
+        url += "&REST-PAYLOAD";
+        url += "&keywords="+product;
+        url += "&paginationInput.entriesPerPage=10";
+        s=document.createElement('script'); // create script element
+        s.src= url;
+        document.body.appendChild(s);
+    };
+
+    // Parse the response and build an HTML table to display search results
+    function _cb_findItemsByKeywords(root) {
+        var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
+        var html = [];
+        html.push('<table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody>');
+        for (var i = 0; i < items.length; ++i) {
+            var item     = items[i];
+            var title    = item.title;
+            var pic      = item.galleryURL;
+            var viewitem = item.viewItemURL;
+            if (null != title && null != viewitem) {
+                html.push('<tr><td>' + '<img src="' + pic + '" border="0">' + '</td>' +
+                    '<td><a href="' + viewitem + '" target="">' + title + '</a></td></tr>');
+            }
+        }
+        html.push('</tbody></table>');
+        document.getElementById("results").innerHTML = html.join("");
+    }  // End _cb_findItemsByKeywords() function
+
+    // Submit the request
+
+</script>

@@ -1,0 +1,86 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">E~COM</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/">Home</a></li>
+                <li ng-if="model.user.role=='ADMIN'"><a href="#!/admin">Admin</a></li>
+                <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
+                <li ng-if="model.user.role=='RETAILER'"><a href="#!/product">My Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts">Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts">Services</a></li>
+                <li><a href="#aboutcontent">About Us</a></li>
+                <li><a href="#contactcontent">Contact Us</a></li>
+                <li ng-show="!model.user._id"><a href="#!/login">Login</a></li>
+                <li ng-show="model.user._id"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="panel panel-default panelchange2">
+        <div class="panel-heading panelfont">
+            <h4 class="pull-left">Product List</h4>
+            <a href="#!/product/new" style="color:black">
+                <span class="glyphicon glyphicon-plus pull-right"></span>
+            </a>
+        </div>
+        <div class="panel-body">
+        <div class="row" >
+            <div class="col-sm-3 col-xs-12" ng-repeat="product in model.products">
+            <div class="card" style="width:100%;border: 1px solid;">
+                <img class="card-img-top" width="100%" height="200px" src="{{product.url}}" alt="Card image cap">
+                <div class="card-block " style="height: 110px;padding-left: 5px;">
+
+                    <h4 class="card-title"><b>Product Name : </b>{{product.name}}</h4>
+                    <p class="card-text"><b>Rate : </b>{{product.price}}</p>
+
+                </div>
+                <div class="card-footer text-center">
+                    <a href="#!/product/{{product._id}}" class="btn btn-default">
+                        Edit Product Details <span class="glyphicon glyphicon-arrow-right"></span>
+                    </a>
+                </div>
+            </div>
+            </div>
+        </div>
+           <!-- <div class="row">
+                <div class="col-lg-5 col-md-8 col-xs-11">
+                    <a href="#!/product/{{product._id}}/page">
+                        {{product.name}}
+                    </a>
+                </div>
+                <div class="col-lg-3 visible-lg">
+                    {{product.dateCreated | date : 'short'}}
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    {{product.quantity}}
+                </div>
+                <div class="col-xs-1">
+                    <a href="#!/product/{{product._id}}">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav pfont">
+            <p>Developed by<a href="https://mehta-jheel-webdev.herokuapp.com/" class="btn btn-link text-primary">Jheel Mehta</a>@ 2017</p>
+        </ul>
+    </div>
+</nav>

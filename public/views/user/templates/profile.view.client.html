@@ -1,0 +1,283 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">E~COM</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/">Home</a></li>
+                <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
+                <li ng-if="model.user.role=='RETAILER'"><a href="#!/product">My Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/product">Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/service">Services</a></li>
+                <li><a href="#aboutcontent">About Us</a></li>
+                <li><a href="#contactcontent">Contact Us</a></li>
+                <li ng-show="!model.user._id"><a href="#!/login">Login</a></li>
+                <li ng-show="model.user._id"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4">
+            <div class="panel panel-default panelchange">
+                <div class="row">
+                    <div class="col-lg-2 col-xs-3">
+                <img src="http://cdn.quilt.janrain.com/2.1.2/profile_default.png" width="50px" class="img-responsive img-circle imgpad" alt="Responsive image">
+                    </div>
+                    <div class="col-lg-10 col-xs-9">
+                        <h2>Profile</h2>
+                </div>
+                </div>
+                </ul>
+                <div class="panel-body">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <div ng-show="model.message" class="alert alert-info">
+        {{model.message}}
+    </div>
+    <div ng-show="model.user.role!=='ADMIN' && model.user.role!=='RETAILER' && model.user.role!=='CUSTOMER'" class="alert alert-danger">
+        Please update your role preference before getting started!
+    </div>
+    <form>
+        <label ng-show="model.user.role!=='ADMIN' && model.user.role!=='RETAILER' && model.user.role!=='CUSTOMER'" for="role">Role</label>
+        <select ng-show="model.user.role!=='ADMIN' && model.user.role!=='RETAILER' && model.user.role!=='CUSTOMER'" id="role" ng-model="role" class="form-control">
+            <option value="CUSTOMER">Customer</option>
+            <option value="RETAILER">Retailer</option>
+        </select>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input ng-model="model.user.username"
+                   type="text"
+                   class="form-control" id="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" ng-model="model.user.email" class="form-control" id="email" placeholder="alice@wonderland.com">
+        </div>
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input ng-model="model.user.firstName" type="text" class="form-control" id="first-name" placeholder="Alice">
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" ng-model="model.user.lastName" class="form-control" id="last-name" placeholder="Wonderland">
+        </div>
+        <div ng-show="model.user.role=='RETAILER'" class="form-group">
+            <label for="last-name">Company Name</label>
+            <input type="text" ng-model="model.user.companyname" class="form-control" id="company-name" placeholder="XYZ">
+        </div>
+        <div class="form-group">
+            <label for="contact-number">Contact Number</label>
+            <input type="text" ng-model="model.user.contactnumber" class="form-control" id="contact-number" placeholder="XYZ">
+        </div>
+        <div ng-show="model.user.role=='CUSTOMER'" class="form-group">
+            <label for="add">Address</label>
+            <input type="text" ng-model="model.user.address" class="form-control" id="add" placeholder="XYZ">
+        </div>
+        <div ng-show="model.user.role=='RETAILER'" class="form-group">
+            <label for="ps-type">Product/Service Type</label>
+            <input type="text" ng-model="model.user.type" class="form-control" id="ps-type" placeholder="XYZ">
+        </div>
+    </form>
+
+    <a ng-click="model.updateUser(model.user,role)"
+       class="btn btn-default btn-block">Update</a>
+    <a ng-click="model.deleteUser(model.user)"
+       class="btn btn-default btn-block">Unregister</a>
+   <!-- <a class="btn btn-danger  btn-block"
+       ng-click="model.logout()">Logout</a>-->
+
+                </div>
+            </div>
+        </div>
+
+
+        <div ng-if="model.user.role=='ADMIN'" class="col-xs-12 col-sm-8">
+            <div class="panel panel-default panelchange">
+                <h2 class="imgpad">Account Statistics</h2>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="panel panel-default panelmar">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Users</h5>
+                            </div>
+                            <div class="panel-body">
+                                There are {{model.allusers}} Users on this website.
+
+                                <br/>
+                                <a href="#!/allusers"
+                                   class="btn btn-link">View All <span class="glyphicon glyphicon-arrow-right"></span></class></a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="panel panel-default panelmar">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Orders</h5>
+                            </div>
+                            <div class="panel-body">
+                                Total {{model.size}} orders have been placed.
+
+                                <br/>
+                                <a href="#!/allorders"
+                                   class="btn btn-link">View All <span class="glyphicon glyphicon-arrow-right"></span></class></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="panel panel-default panelmar">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Products</h5>
+                            </div>
+                            <div class="panel-body">
+                                Total {{model.pro}} Products have been Listed.
+
+                                <br/>
+                                <a href="#!/product"
+                                   class="btn btn-link">View All <span class="glyphicon glyphicon-arrow-right"></span></class></a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="panel panel-default panelmar">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Services</h5>
+                            </div>
+                            <div class="panel-body">
+                                Total {{model.pro}} Services have been Listed.
+
+                                <br/>
+                                <a href="#!/product"
+                                   class="btn btn-link">View All <span class="glyphicon glyphicon-arrow-right"></span></class></a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div ng-if="model.user.role=='RETAILER'" class="col-xs-12 col-sm-8">
+            <div class="panel panel-default panelchange">
+                <h2 class="imgpad">Account Statistics</h2>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="panel panel-default panelmar">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Followers</h5>
+                            </div>
+                            <div class="panel-body">
+                                You have {{model.user.noOfFollowers}} followers.
+
+<br/>
+                                <a href="#!/allsellers"
+                                   class="btn btn-link">View All <span class="glyphicon glyphicon-arrow-right"></span></class></a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="panel panel-default panelmar">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Orders</h5>
+                            </div>
+                            <div class="panel-body">
+                                You have {{model.size}} orders.
+
+                                <br/>
+                                <a href="#!/allorders"
+                                   class="btn btn-link">View All <span class="glyphicon glyphicon-arrow-right"></span></class></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="panel panel-default panelmar">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Products</h5>
+                            </div>
+                            <div class="panel-body">
+                                You have {{model.pro}} Products.
+
+                                <br/>
+                                <a href="#!/product"
+                                   class="btn btn-link">View All <span class="glyphicon glyphicon-arrow-right"></span></class></a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div ng-if="model.user.role=='CUSTOMER'" class="col-xs-12 col-sm-8">
+            <div class="panel panel-default panelchange">
+                <h2 class="imgpad">Account Statistics</h2>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="panel panel-default panelmar">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Followed</h5>
+                            </div>
+                            <div class="panel-body">
+                                You have followed {{model.user.noOfFollowers}} sellers.
+
+                                <br/>
+                                <a href="#!/allsellers"
+                                   class="btn btn-link">View All <span class="glyphicon glyphicon-arrow-right"></span></class></a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="panel panel-default panelmar">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Orders</h5>
+                            </div>
+                            <div class="panel-body">
+                                You have {{model.size}} orders.
+
+                                <br/>
+                                <a href="#!/allorders"
+                                   class="btn btn-link">View All <span class="glyphicon glyphicon-arrow-right"></span></class></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav pfont">
+            <p>Developed by<a href="https://mehta-jheel-webdev.herokuapp.com/" class="btn btn-link text-primary">Jheel Mehta</a>@ 2017</p>
+        </ul>
+    </div>
+</nav>
