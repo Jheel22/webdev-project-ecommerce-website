@@ -14,11 +14,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#!/">Home</a></li>
-                <li ng-if="model.currentUser.role=='ADMIN'"><a href="#!/admin">Admin</a></li>
                 <li ng-show="model.currentUser._id"><a href="#!/profile">Profile</a></li>
                 <li ng-if="model.currentUser.role=='RETAILER'"><a href="#!/product">My Products</a></li>
-                <li ng-if="model.currentUser.role=='CUSTOMER'"><a href="#!/viewproducts">Products</a></li>
-                <li ng-if="model.currentUser.role=='CUSTOMER'"><a href="#!/viewproducts">Services</a></li>
+                <li ng-if="model.currentUser.role=='CUSTOMER' || model.currentUser.role===undefined"><a href="#!/viewproducts/product">Products</a></li>
+                <li ng-if="model.currentUser.role=='CUSTOMER' || model.currentUser.role===undefined"><a href="#!/viewproducts/service">Services</a></li>
                 <li><a href="#aboutcontent">About Us</a></li>
                 <li><a href="#contactcontent">Contact Us</a></li>
                 <li ng-show="!model.currentUser._id"><a href="#!/login">Login</a></li>

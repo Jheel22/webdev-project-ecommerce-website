@@ -17,6 +17,12 @@
                     .findOrderForUser(model.userId)
                     .then(renderOrders);
             }
+            else if(currentUser.role==='ADMIN')
+            {
+                orderService
+                    .findAllOrders()
+                    .then(renderOrders);
+            }
             else
             {
                 orderService

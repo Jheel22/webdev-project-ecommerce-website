@@ -14,11 +14,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#!/">Home</a></li>
-                <li ng-if="model.user.role=='ADMIN'"><a href="#!/admin">Admin</a></li>
                 <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
                 <li ng-if="model.user.role=='RETAILER'"><a href="#!/product">My Products</a></li>
-                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/product">Products</a></li>
-                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/service">Services</a></li>
+                <li ng-if="model.user.role=='CUSTOMER' || model.user.role===undefined"><a href="#!/viewproducts/product">Products</a></li>
+                <li ng-if="model.user.role=='CUSTOMER' || model.user.role===undefined"><a href="#!/viewproducts/service">Services</a></li>
                 <li><a href="#aboutcontent">About Us</a></li>
                 <li><a href="#contactcontent">Contact Us</a></li>
                 <li ng-show="!model.user._id"><a href="#!/login">Login</a></li>
@@ -31,6 +30,9 @@
 
 <div class="container-fluid">
     <div class="panel panel-default panelchange2">
+        <div ng-show="model.message" class="alert alert-info">
+            {{model.message}}
+        </div>
         <div class="panel-heading panelfont">
             <h4 class="pull-left">Product List</h4>
         </div>
@@ -61,8 +63,11 @@
 
                         </div>
                         <div class="card-footer text-center">
-                            <a href="#!/viewproduct/{{product._id}}" class="btn btn-default">
+                            <a ng-if="model.user.role=='CUSTOMER'" href="#!/viewproduct/{{product._id}}" class="btn btn-default">
                                 View Product Details <span class="glyphicon glyphicon-arrow-right"></span>
+                            </a>
+                            <a ng-if="model.user.role=='ADMIN'" href="#!/product/{{product._id}}" class="btn btn-default">
+                                Edit Product Details <span class="glyphicon glyphicon-arrow-right"></span>
                             </a>
                         </div>
                     </div>

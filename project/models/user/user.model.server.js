@@ -20,6 +20,8 @@ userModel.findAllSellers=findAllSellers;
 userModel.findAllCustomers=findAllCustomers;
 userModel.updateUserFollowers=updateUserFollowers;
 userModel.updateFollowing=updateFollowing;
+userModel.updateUserByAdmin=updateUserByAdmin;
+userModel.createUserByAdmin=createUserByAdmin;
 module.exports = userModel;
 
 
@@ -72,6 +74,10 @@ function createUser(user) {
     return userModel.create(user);
 }
 
+function createUserByAdmin(user) {
+    return userModel.create(user);
+}
+
 function findUserById(userId) {
     return userModel.findById(userId);
 }
@@ -99,6 +105,11 @@ function findUserByCredentials(username) {
 
 function updateUser(userId, newUser) {
     delete newUser.username;
+    delete newUser.password;
+    return userModel.update({_id: userId}, {$set: newUser});
+}
+
+function updateUserByAdmin(userId, newUser) {
     delete newUser.password;
     return userModel.update({_id: userId}, {$set: newUser});
 }

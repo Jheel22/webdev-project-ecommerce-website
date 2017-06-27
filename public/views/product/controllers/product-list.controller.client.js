@@ -35,6 +35,10 @@
             { name: "Tutoring Services" }
         ];
         function init() {
+            if(currentUser.role===undefined)
+            {
+                model.message="Please login or register to view products in detail";
+            }
             if(currentUser.role==='RETAILER')
             {
                 productService

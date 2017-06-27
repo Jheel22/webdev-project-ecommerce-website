@@ -82,7 +82,13 @@ model.alreadyliked=1;
             productService
                 .deleteProduct(model.userId,model.productId)
                 .then(function () {
-                    $location.url('/product');
+                    if(currentUser.role==="ADMIN")
+                    {
+                        $location.url('/profile');
+                    }
+                    else {
+                        $location.url('/product');
+                    }
                 }, function () {
                     model.error = "Unable to unregister you";
                 });
@@ -93,7 +99,13 @@ model.alreadyliked=1;
             productService
                 .updateProduct(model.productId, product)
                 .then(function () {
-                    $location.url('/product');
+                    if(currentUser.role==="ADMIN")
+                    {
+                        $location.url('/profile');
+                    }
+                    else {
+                        $location.url('/product');
+                    }
                 }, function () {
                     model.error = "Unable to update product";
                 });

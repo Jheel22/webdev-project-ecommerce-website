@@ -5,7 +5,7 @@
 
     function profileController($location,
                                currentUser,
-                               userService,orderService) {
+                               userService,orderService,productService) {
 
         var model = this;
         model.userId = currentUser._id;
@@ -13,12 +13,13 @@
         model.size=currentUser.orders.length;
         model.pro=currentUser.products.length;
         model.allusers=0;
+        model.allproducts=0;
+        model.allservices=0;
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
         model.logout = logout;
 
         function init() {
-           // console.log(currentUser);
             if(currentUser.role==='RETAILER')
             {
                 orderService
@@ -30,6 +31,15 @@
                 userService
                     .findAllUsers()
                     .then(renderUsers);
+                orderService
+                    .findAllOrders()
+                    .then(renderOrders);
+                productService
+                    .findAllProducts("product")
+                    .then(renderProducts);
+                productService
+                    .findAllProducts("service")
+                    .then(renderServices);
             }
             renderUser(currentUser);
         }
@@ -69,6 +79,12 @@
         }
         function renderUsers(users) {
             model.allusers=users.length;
+        }
+        function renderProducts(products) {
+            model.allproducts=products.length;
+        }
+        function renderServices(services) {
+            model.allservices=services.length;
         }
         function renderOrders(orders) {
             model.size = orders.length;

@@ -41,7 +41,9 @@ app.get ('/api/project/user',isAdmin, findAllUsers);
 app.get ('/api/project/seller', findAllSellers);
 app.get ('/api/project/customer', findAllCustomers);
 app.post('/api/project/user', createUser);
+app.post('/api/project/admin/user',isAdmin, createUserByAdmin);
 app.put ('/api/project/user/:userId', updateUser);
+app.put ('/api/project/admin/user/:userId',isAdmin, updateUserByAdmin);
 app.delete ('/api/project/user/:userId', deleteUser);
 
 app.put('/api/project/seller/:sellerId/user/:userId/following/:following',updateUserFollowers);
@@ -126,7 +128,7 @@ function checkAdmin(req, res) {
 }
 
 function checkRetailer(req, res) {
-    if(req.isAuthenticated() && req.user.role==='RETAILER') {
+    if(req.isAuthenticated() && (req.user.role==='RETAILER' || req.user.role==='ADMIN')) {
         res.json(req.user);
     } else {
         res.send('0');
@@ -187,10 +189,31 @@ function updateUser(req, res) {
         });
 }
 
+function updateUserByAdmin(req, res) {
+    var user = req.body;
+    userModel
+        .updateUserByAdmin(req.params.userId, user)
+        .then(function (status) {
+            res.send(status);
+        });
+}
+
 function createUser(req, res) {
     var user = req.body;
     userModel
         .createUser(user)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.send(err);
+        });
+}
+
+function createUserByAdmin(req, res) {
+    var user = req.body;
+    user.password=bcrypt.hashSync(user.password)
+    userModel
+        .createUserByAdmin(user)
         .then(function (user) {
             res.json(user);
         }, function (err) {

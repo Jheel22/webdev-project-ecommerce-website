@@ -14,11 +14,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#!/">Home</a></li>
-                <li ng-if="model.user.role=='ADMIN'"><a href="#!/admin">Admin</a></li>
                 <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
                 <li ng-if="model.user.role=='RETAILER'"><a href="#!/product">My Products</a></li>
-                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/product">Products</a></li>
-                <li ng-if="model.user.role=='CUSTOMER'"><a href="#!/viewproducts/service">Services</a></li>
+                <li ng-if="model.currentUser.role=='CUSTOMER' || model.currentUser.role===undefined"><a href="#!/viewproducts/product">Products</a></li>
+                <li ng-if="model.currentUser.role=='CUSTOMER' || model.currentUser.role===undefined"><a href="#!/viewproducts/service">Services</a></li>
                 <li><a href="#aboutcontent">About Us</a></li>
                 <li><a href="#contactcontent">Contact Us</a></li>
                 <li ng-show="!model.user._id"><a href="#!/login">Login</a></li>
@@ -42,6 +41,8 @@
             <p><b>Specifications</b> : {{model.product.description}}</p>
             <p ng-if="model.product.type=='product'"><b>Quantity Available</b> : {{model.product.quantity}}</p>
             <p><b>Rate</b> : {{model.product.price}}</p>
+            <p><b>Category</b> : {{model.product.category}}</p>
+            <p><b>Type</b> : {{model.product.type}}</p>
             <label ng-if="model.product.type=='product'" for="name">Quantiy to order</label>
             <input ng-if="model.product.type=='product'" class="form-control"
                    ng-model="model.quant"

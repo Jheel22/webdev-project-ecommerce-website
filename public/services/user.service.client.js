@@ -20,6 +20,8 @@
             findAllUsers:findAllUsers,
             findAllSellers:findAllSellers,
             updateUserFollowers:updateUserFollowers,
+            updateUserByAdmin:updateUserByAdmin,
+            createUserByAdmin:createUserByAdmin,
             findAllCustomers:findAllCustomers
         };
         return api;
@@ -93,6 +95,15 @@
                 });
         }
 
+        function updateUserByAdmin(userId, user) {
+            var url = "/api/project/admin/user/"+userId;
+            return $http.put(url, user)
+                .then(function (response) {
+
+                    return response.data;
+                });
+        }
+
         function createUser(user) {
             var url = "/api/project/user";
             return $http.post(url, user)
@@ -100,6 +111,15 @@
                     return response.data;
                 });
         }
+
+        function createUserByAdmin(user) {
+            var url = "/api/project/admin/user";
+            return $http.post(url, user)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
 
         function findUserByUsername(username) {
             var url = "/api/project/user?username="+username;

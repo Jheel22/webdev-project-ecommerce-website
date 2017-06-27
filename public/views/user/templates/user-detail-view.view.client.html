@@ -32,23 +32,17 @@
     <div class="panel panel-default panelchange2">
         <div class="panel-body">
     <div class="row">
-        <div class="col-xs-12 col-md-4">
-<img src="{{model.order.url}}" width="300px" height="300px">
-
-        </div>
-        <div class="col-xs-12 col-md-8">
-<h3>{{model.order.name}}</h3>
-            <p><b>Specifications</b> : {{model.order.description}}</p>
-            <p><b>Rate</b> : {{model.order.price}}</p>
-            <p ng-if="model.order.type==='product'"><b>Quantity Ordered</b> : {{model.order.quantity}}</p>
-            <p><b>Category</b> : {{model.order.category}}</p>
-            <p><b>Type</b> : {{model.order.type}}</p>
-            <p><b>Amount</b> : {{model.order.amount}}</p>
-
-            <a href="#!/allorders"
-               class="btn btn-sm btn-default pull-right">
-                Back
-            </a>
+        <div class="col-xs-12">
+            <h2>User Details</h2>
+<h3>{{model.selectedUser.username}}</h3>
+            <p ng-if="model.selectedUser.firstName!=='RETAILER'"><b>Full Name</b> : {{model.selectedUser.firstName}} {{model.user.lastName}}</p>
+            <p><b>Role</b> : {{model.selectedUser.role}}</p>
+            <p ng-if="model.selectedUser.role!=='RETAILER'"><b>No of Followers</b> : {{model.selectedUser.noOfFollowers}}</p>
+            <p ng-if="model.selectedUser.address!==undefined"><b>Address</b> : {{model.user.selectedUser}}</p>
+            <p ng-if="model.selectedUser.email!==undefined"><b>Email</b> : {{model.selectedUser.email}}</p>
+            <p ng-if="model.selectedUser.contactnumber!==undefined"><b>Contact</b> : {{model.selectedUser.contactnumber}}</p>
+            <p ng-if="model.selectedUser.companyname!==undefined"><b>Contact</b> : {{model.selectedUser.companyname}}</p>
+            <p ng-if="model.selectedUser.type!==undefined"><b>Product Type</b> : {{model.selectedUser.type}}</p>
         </div>
     </div>
 
