@@ -13,8 +13,8 @@ productModel.findProductByProductname=findProductByProductname;
 productModel.findProductsByCategory=findProductsByCategory;
 productModel.updateProductLikes=updateProductLikes;
 productModel.updateProductURL=updateProductURL;
-//productModel.addReview = addReview;
-//productModel.deleteReview = deleteReview;
+productModel.addReview = addReview;
+productModel.deleteReview = deleteReview;
 
 module.exports = productModel;
 

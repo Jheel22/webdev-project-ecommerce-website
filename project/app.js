@@ -13,3 +13,4 @@ mongoose.Promise = require('q').Promise;
 require('./services/user.service.server');
 require('./services/product.service.server');
 require('./services/order.service.server');
+require('./services/review.service.server');

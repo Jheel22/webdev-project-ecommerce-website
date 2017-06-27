@@ -37,7 +37,9 @@
 
         </div>
         <div class="col-xs-12 col-md-8">
+
 <h3>{{model.product.name}}</h3>
+
             <p><b>Specifications</b> : {{model.product.description}}</p>
             <p ng-if="model.product.type=='product'"><b>Quantity Available</b> : {{model.product.quantity}}</p>
             <p><b>Rate</b> : {{model.product.price}}</p>
@@ -53,6 +55,11 @@
                    ng-model="model.amount"
                    placeholder="1"
                    id="amt"/>
+            <a ng-click="model.updateProductLikes(model.product)"
+               class="btn btn-link text-primary btn-md">
+
+                <span class="glyphicon glyphicon-thumbs-up">{{model.product.likes}} likes</span>
+            </a>
             <a ng-click="model.orderProduct(model.product,model.quant)"
                class="btn btn-sm btn-default pull-right">
                 Place order
@@ -61,17 +68,32 @@
                class="btn btn-sm btn-default pull-right">
                 Compare
             </a>
+<br/>
+            <label for="rev">Write a review</label>
+            <input class="form-control"
+                   ng-model="review.text"
+                   placeholder="What do you think about the product?"
+                   id="rev"/>
+            <a mg-if="model.review.text!==undefined && model.review.text!==null" ng-click="model.addReview(review)"
+               class="btn btn-block btn-default pull-right">
+                Post
+            </a>
+<h5>Product Reviews : </h5>
+            <ul class="list-group">
+
+                <li ng-repeat="review in model.reviews" class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            {{review.text}}
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 
-<div class="row">
-    <a ng-click="model.updateProductLikes(model.product)"
-       class="btn btn-link text-primary btn-lg pull-left">
-
-        <span class="glyphicon glyphicon-thumbs-up">{{model.product.likes}} likes</span>
-    </a>
-
-</div>
 
         </div>
     </div>

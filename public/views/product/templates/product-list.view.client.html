@@ -45,11 +45,15 @@
 
                     <h4 class="card-title"><b>Product Name : </b>{{product.name}}</h4>
                     <p class="card-text"><b>Rate : </b>{{product.price}}</p>
+                    <p class="card-text"><b>Type : </b>{{product.type}}</p>
 
                 </div>
                 <div class="card-footer text-center">
                     <a href="#!/product/{{product._id}}" class="btn btn-default">
                         Edit Product Details <span class="glyphicon glyphicon-arrow-right"></span>
+                    </a>
+                    <a href="#!/product/{{product._id}}/reviews" class="btn btn-default">
+                        View Product Reviews
                     </a>
                 </div>
             </div>

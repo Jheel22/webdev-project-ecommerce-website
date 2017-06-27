@@ -119,6 +119,14 @@
                     currentUser: checkLoggedIn
                 }
             })
+            .when('/product/:productId/reviews', {
+                templateUrl: 'views/review/templates/all-reviews-product.view.client.html',
+                controller: 'editReviewController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkRetailer
+                }
+            })
     }
 
     function checkAdmin(userService, $q, $location) {

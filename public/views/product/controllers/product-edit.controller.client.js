@@ -7,7 +7,7 @@
                                    $location,
                                    currentUser,
                                    productService,
-                                   userService,orderService) {
+                                   userService,orderService,reviewService) {
         var model = this;
 
         model.userId = currentUser._id;
@@ -19,6 +19,7 @@
         model.updateProduct=updateProduct;
         model.deleteProduct=deleteProduct;
         model.orderProduct=orderProduct;
+        model.addReview=addReview;
         model.logout=logout;
         model.productList=[
             { name: "Books" },
@@ -54,6 +55,10 @@
             productService
                 .findProductById(model.productId)
                 .then(renderProduct, ProductError);
+
+            reviewService
+                .findReviewsForProduct(model.productId)
+                .then(renderReviews);
         }
         init();
 
@@ -68,6 +73,9 @@ model.alreadyliked=1;
 
         function ProductError(product) {
             model.error = "Product not found";
+        }
+        function renderReviews(reviews) {
+            model.reviews = reviews;
         }
 
         function logout() {
@@ -95,7 +103,6 @@ model.alreadyliked=1;
         }
 
         function updateProduct(product) {
-            console.log(product);
             productService
                 .updateProduct(model.productId, product)
                 .then(function () {
@@ -146,7 +153,16 @@ model.alreadyliked=1;
                 }
             }
         }
-
+function addReview(review) {
+review._user=currentUser._id;
+review._product=model.productId;
+    reviewService
+        .createReview(review, model.productId)
+        .then(function (user) {
+            review.text=null;
+            init();
+        });
+}
         function updateProductLikes(product) {
             if (model.alreadyliked != 1) {
                 var likes = product.likes;
