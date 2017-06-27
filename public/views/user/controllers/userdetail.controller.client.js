@@ -9,6 +9,7 @@
         model.user=currentUser;
         model.selectedUserId=$routeParams.userId;
         model.selectedUser=currentUser;
+        model.back=back;
         model.logout = logout;
 
         function init() {
@@ -21,6 +22,18 @@
         }
 
         init();
+
+
+        function back() {
+            if(currentUser.role==='ADMIN') {
+                $location.url('/allusers');
+            }
+            else
+            {
+                $location.url('/allsellers');
+            }
+        }
+
 
         function renderUser(user) {
             model.selectedUser = user;

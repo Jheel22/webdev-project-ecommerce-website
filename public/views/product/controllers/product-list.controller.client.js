@@ -12,6 +12,7 @@
         model.logout=logout;
         model.updateProductSearch=updateProductSearch;
         model.userId = currentUser._id;
+        model.back=back;
         model.user=currentUser;
         model.productList=[
             { name: "Books" },
@@ -52,6 +53,12 @@
             }
         }
         init();
+
+        function back() {
+            $location.url('/profile');
+        }
+
+
 
         function updateProductSearch(category) {
 if(category==='' || category===undefined || category===null)

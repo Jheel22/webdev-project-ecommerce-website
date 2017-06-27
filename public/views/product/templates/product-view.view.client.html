@@ -7,6 +7,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <a class="navbar-brand" ng-click="model.back()">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
             <a class="navbar-brand" href="#">E~COM</a>
         </div>
 
@@ -78,7 +81,7 @@
                class="btn btn-block btn-default pull-right">
                 Post
             </a>
-<h5>Product Reviews : </h5>
+            <h5><b>Product Reviews</b> : </h5>
             <ul class="list-group">
 
                 <li ng-repeat="review in model.reviews" class="list-group-item">

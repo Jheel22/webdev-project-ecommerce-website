@@ -7,6 +7,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <a class="navbar-brand" ng-click="model.back()">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+
             <a class="navbar-brand" href="#">E~COM</a>
         </div>
 
@@ -45,10 +49,7 @@
             <p><b>Type</b> : {{model.order.type}}</p>
             <p><b>Amount</b> : {{model.order.amount}}</p>
 
-            <a href="#!/allorders"
-               class="btn btn-sm btn-default pull-right">
-                Back
-            </a>
+
         </div>
     </div>
 

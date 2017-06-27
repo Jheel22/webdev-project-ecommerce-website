@@ -20,6 +20,7 @@
         model.deleteProduct=deleteProduct;
         model.orderProduct=orderProduct;
         model.addReview=addReview;
+        model.back=back;
         model.logout=logout;
         model.productList=[
             { name: "Books" },
@@ -50,6 +51,24 @@
                 name: "service"
             }
         ];
+
+
+        function back() {
+            if(currentUser.role==='RETAILER') {
+                $location.url('/product');
+            }
+            else{
+                if(model.product.type==='product')
+                {
+                    $location.url('/viewproducts/product');
+                }
+                else{
+                    $location.url('/viewproducts/service');
+                }
+
+            }
+        }
+
 
         function init() {
             productService

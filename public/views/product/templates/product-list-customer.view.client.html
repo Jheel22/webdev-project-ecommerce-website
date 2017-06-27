@@ -7,6 +7,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <a class="navbar-brand" ng-click="model.back()">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
             <a class="navbar-brand" href="#">E~COM</a>
         </div>
 
@@ -55,7 +58,7 @@
             <div class="row" >
                 <div class="col-sm-3 col-xs-12" ng-repeat="product in model.products">
                     <div class="card" style="width:100%;border: 1px solid;">
-                        <img class="card-img-top" width="100%" height="200px" src="{{product.url}}" alt="Card image cap">
+                        <img class="card-img-top" width="100%" height="200px" ng-src="{{product.url}}" alt="Card image cap">
                         <div class="card-block " style="height: 110px;padding-left: 5px;">
 
                             <h4 class="card-title"><b>Product Name : </b>{{product.name}}</h4>

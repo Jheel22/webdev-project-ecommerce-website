@@ -10,7 +10,7 @@
         model.logout=logout;
         model.userId = currentUser._id;
         model.user=currentUser;
-
+        model.back=back;
         function init() {
             if(currentUser.role==='CUSTOMER') {
                 orderService
@@ -32,6 +32,10 @@
 
         }
         init();
+
+        function back() {
+            $location.url('/profile');
+        }
 
         function logout() {
             userService

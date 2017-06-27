@@ -15,6 +15,7 @@
         model.deleteReview=deleteReview;
         model.cancelUpdate=cancelUpdate;
         model.saveUpdateReview=saveUpdateReview;
+        model.back=back;
         model.logout = logout;
 
         function init() {
@@ -25,6 +26,17 @@
         }
 
         init();
+
+        function back() {
+            if(currentUser.role==='ADMIN') {
+                $location.url('/viewproducts/product');
+            }
+            else
+            {
+                $location.url('/product');
+            }
+        }
+
         function logout() {
             userService
                 .logout()

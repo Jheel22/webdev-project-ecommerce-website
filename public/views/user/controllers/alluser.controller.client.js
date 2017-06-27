@@ -16,6 +16,7 @@
         model.cancelUpdate=cancelUpdate;
         model.saveUpdateUser=saveUpdateUser;
         model.addUser=addUser;
+        model.back=back;
         model.nuser=0;
         model.logout = logout;
         model.message="Any new user created by admin will have the default password same as username";
@@ -33,6 +34,9 @@
                 .then(function () {
                     $location.url('/login');
                 });
+        }
+        function back() {
+            $location.url('/profile');
         }
 
         function deleteUser(user) {

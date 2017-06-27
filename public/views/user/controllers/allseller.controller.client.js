@@ -11,6 +11,7 @@
         model.userId = currentUser._id;
         model.user=currentUser;
         model.updateFollowers = updateFollowers;
+        model.back=back;
         model.logout = logout;
         model.alreadyFollowed=0;
         function init() {
@@ -29,6 +30,11 @@
         }
 
         init();
+
+        function back() {
+            $location.url('/profile');
+        }
+
         function logout() {
             userService
                 .logout()

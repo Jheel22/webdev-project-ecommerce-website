@@ -14,6 +14,7 @@
         model.user=currentUser;
         model.updateOrder=updateOrder;
         model.deleteOrder=deleteOrder;
+        model.back=back;
         model.logout=logout;
 
         function init() {
@@ -47,6 +48,10 @@
                 }, function () {
                     model.error = "Unable to unregister you";
                 });
+        }
+
+        function back() {
+            $location.url('/allorders');
         }
 
         function updateOrder(order) {
