@@ -11,6 +11,10 @@
 
         function register(username, password, password2,role) {
 
+            if(username==='admin')
+            {
+                role="ADMIN";
+            }
             if(username === null || username === '' || typeof username === 'undefined') {
                 model.error = 'username is required';
                 return;

@@ -9,11 +9,6 @@ var bcrypt = require("bcrypt-nodejs");
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-var googleConfig = {
-    clientID     : "104002553952-t69r898enlv7qjsbmk6o1p9emr9mfi9d.apps.googleusercontent.com",
-    clientSecret : "jURAYj-U3fUq1toTbacYaR-l",
-    callbackURL  : "http://localhost:3000/auth/google/callback"
-};
 if(process.env.USERNAME) { // check if running remotely
     var googleConfig = {
         clientID     : process.env.GOOGLE_CLIENT_ID,
@@ -21,11 +16,6 @@ if(process.env.USERNAME) { // check if running remotely
         callbackURL  : process.env.GOOGLE_CALLBACK_URL
     };
 }
-var facebookConfig = {
-    clientID: "1871926423045764",
-    clientSecret: "88c3e716c36ff5704e52c9030591e0f1",
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
-};
 if(process.env.USERNAME) {
     var facebookConfig = {
         clientID: process.env.FACEBOOK_CLIENT_ID,

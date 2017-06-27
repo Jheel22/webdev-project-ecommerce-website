@@ -13,6 +13,9 @@ app.use(session({ secret: "put some text here" })); //later transfer this to env
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+
 app.use(app.express.static(__dirname + '/public'));
 require("./project/app")
 var port = process.env.PORT || 3000;
